@@ -7,11 +7,19 @@ import Error from './components/Error.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Results from './pages/Results.jsx'
 import Freelances from './pages/Freelances.jsx'
+import { createGlobalStyle } from 'styled-components'
+
+const GlobalStyle = createGlobalStyle`
+    div {
+        font-family: 'Trebuchet MS', Helvetica, sans-serif;
+    }
+`
 
 ReactDOM.render(
 	<StrictMode>
 		<Router>
 			<Header/>
+			<GlobalStyle />
 			<Routes>
 				<Route path='/' element={<Home/>}/>
 				<Route path='/survey/:questionNb' element={<Survey/>}/>
