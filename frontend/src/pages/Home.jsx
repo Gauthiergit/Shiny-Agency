@@ -1,42 +1,56 @@
-import '../styles/Home.css';
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import colors from '../utils/styles/Colors'
+import { StyledLink } from '../utils/styles/Atoms';
 import homeImg from '../assets/home-illustration.svg'
+import colors from '../utils/styles/Colors';
 
-const StyledLink = styled(Link)`
-	padding: 15px;
-	color: white;
-	text-decoration: none;
-	font-size: 20px;
-	border-radius: 30px;
-	background-color: ${colors.primary}
+
+const HomeWrapper = styled.div`
+	display: flex;
+	justify-content: center;
 `
 
-const StyledHome = styled.div`
+const HomerContainer = styled.div`
+	margin: 30px;
+	background-color: ${colors.backgroundLight};
+	padding: 60px 90px;
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
-	gap: 60px;
-	align-items: center;
-	padding-bottom: 20px;
+	max-width: 1200px;
 `
 
-const StyledText = styled.p`
-	font-size: 50px;
-	font-weight: bold;
-	color: rgb(41, 41, 41);
+const LeftCol = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	flex: 1;
+	${StyledLink} {
+		max-width: 250px;
+	}
+`
+
+const StyledTitle = styled.h2`
+	padding-bottom: 30px;
+	max-width: 280px;
+	line-height: 50px;
+`
+
+const Illustration = styled.img`
+	flex: 1;
 `
 
 function Home() {
 	return (
-		<StyledHome>
-			<div>
-				<StyledText>Repérez vos besoins,<br/>on s'occupe du reste,<br/>avec les meilleurs talents</StyledText>
-				<StyledLink to="/survey/1">Faire le test</StyledLink>
-			</div>
-			<img src={homeImg} alt="home-img" />
-		</StyledHome>
+		<HomeWrapper>
+			<HomerContainer>
+				<LeftCol>
+					<StyledTitle>
+						Repérez vos besoins, on s'occupe du reste, avec les meilleurs talents
+					</StyledTitle>
+					<StyledLink to="/survey/1" $isFullLink>Faire le test</StyledLink>
+				</LeftCol>
+				<Illustration src={homeImg} />
+			</HomerContainer>
+		</HomeWrapper>
 	)
 }
 

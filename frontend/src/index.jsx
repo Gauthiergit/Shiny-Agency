@@ -7,26 +7,27 @@ import Error from './components/Error.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Results from './pages/Results.jsx'
 import Freelances from './pages/Freelances.jsx'
-import { createGlobalStyle } from 'styled-components'
-
-const GlobalStyle = createGlobalStyle`
-    div {
-        font-family: 'Trebuchet MS', Helvetica, sans-serif;
-    }
-`
+import Footer from './components/Footer.jsx'
+import { ThemeProvider, SurveyProvider } from './utils/Context.jsx'
+import GlobalStyle from './utils/styles/GlobalStyle.jsx'
 
 ReactDOM.render(
 	<StrictMode>
 		<Router>
-			<Header/>
-			<GlobalStyle />
-			<Routes>
-				<Route path='/' element={<Home/>}/>
-				<Route path='/survey/:questionNb' element={<Survey/>}/>
-				<Route path='/results' element={<Results/>}/>
-				<Route path='/freelances' element={<Freelances/>}/>
-				<Route path='*' element={<Error/>}/>
-			</Routes>
+			<ThemeProvider>
+				<SurveyProvider>
+					<GlobalStyle/>
+					<Header/>
+					<Routes>
+						<Route path='/' element={<Home/>}/>
+						<Route path='/survey/:questionNb' element={<Survey/>}/>
+						<Route path='/results' element={<Results/>}/>
+						<Route path='/freelances' element={<Freelances/>}/>
+						<Route path='*' element={<Error/>}/>
+					</Routes>
+					<Footer/>
+				</SurveyProvider>
+			</ThemeProvider>
 		</Router>
 	</StrictMode>,
 	document.getElementById("root")
