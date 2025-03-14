@@ -2,8 +2,9 @@ import PropTypes from 'prop-types'
 import DefaultPicture from "../assets/avatar_5.png"
 import styled from 'styled-components'
 import colors from '../utils/styles/Colors'
-import { useTheme } from '../utils/Hooks'
-import { useState } from 'react'
+// import { useTheme } from '../utils/Hooks'
+// import { useState } from 'react'
+import { Component } from 'react'
 
 const CardLabel = styled.span`
 	color:color: ${({ theme }) => (theme === 'light' ? colors.primary : '#ffffff')};
@@ -44,20 +45,47 @@ const CardWrapper = styled.div`
 	}
 `
 
-function Card({ label, title, picture }) {
-	const { theme } = useTheme()
-	const [isFavorite, setIsFavorite] = useState(false)
-	const star = isFavorite ? '⭐' : ''
+// function Card({ label, title, picture }) {
+// 	const { theme } = useTheme()
+// 	const [isFavorite, setIsFavorite] = useState(false)
+// 	const star = isFavorite ? '⭐' : ''
 
-	return (
-		<CardWrapper theme={theme} onClick={() => setIsFavorite(!isFavorite)}>
-			<CardLabel theme={theme}>{label}</CardLabel>
-			<CardImage src={picture} alt="freelance" />
-			<CardTitle theme={theme} data-testid="card_title">
-				{star} {title} {star}
-			</CardTitle>
-		</CardWrapper>
-	)
+// 	return (
+// 		<CardWrapper theme={theme} onClick={() => setIsFavorite(!isFavorite)}>
+// 			<CardLabel theme={theme}>{label}</CardLabel>
+// 			<CardImage src={picture} alt="freelance" />
+// 			<CardTitle theme={theme} data-testid="card_title">
+// 				{star} {title} {star}
+// 			</CardTitle>
+// 		</CardWrapper>
+// 	)
+// }
+
+class Card extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			isFavorite: false,
+		}
+	}
+
+	setFavorite() {
+		this.setState({ isFavorite: !this.state.isFavorite })
+	} 
+  
+	render() {
+		const { theme, picture, label, title } = this.props
+
+		return (
+			<CardWrapper theme={theme}> 
+				<CardLabel theme={theme}>{label}</CardLabel>
+				<CardImage src={picture} alt="freelance" />
+				<CardTitle theme={theme}>
+					{title}
+				</CardTitle>
+			</CardWrapper>
+		)
+	}
 }
 
 Card.propTypes = {
